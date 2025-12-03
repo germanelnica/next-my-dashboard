@@ -7,19 +7,19 @@ interface Props {
   params: { id: string };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  try {
-    const { id, name } = await getPokemon(params.id);
+export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await props.params;
 
+  try {
+    const { name } = await getPokemon(id);
     return {
       title: `#${id} - ${name}`,
-      description: `Página del pokémon ${name}`,
+      description: `Página del pokémon ${id}`,
     };
   } catch (error) {
     return {
       title: "Página del pokémon",
-      description:
-        "Culpa cupidatat ipsum magna reprehenderit ex tempor sint ad minim reprehenderit consequat sit.",
+      description: "Información no encontrada",
     };
   }
 }
@@ -41,9 +41,12 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   }
 };
 
-export default async function PokemonPage({ params }: Props) {
-  const pokemon = await getPokemon(params.id);
+export default async function PokemonPage(props: { params: Promise<{ id: string }> }) {
+   const { id } = await props.params;
 
+  console.log("Se cargó: ", id);
+
+  const pokemon = await getPokemon(id);
   return (
     <div className="flex mt-5 flex-col items-center text-slate-800">
       <div className="relative flex flex-col items-center rounded-[20px] w-[700px] mx-auto bg-white bg-clip-border  shadow-lg  p-3">
