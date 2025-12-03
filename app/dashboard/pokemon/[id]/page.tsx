@@ -3,20 +3,18 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-interface Props {
-  params: { id: string };
-}
-
-export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await props.params;
 
   try {
     const { name } = await getPokemon(id);
     return {
       title: `#${id} - ${name}`,
-      description: `Página del pokémon ${id}`,
+      description: `Página del pokémon ${name}`,
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Página del pokémon",
       description: "Información no encontrada",
@@ -33,18 +31,16 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
       // }
     }).then((resp) => resp.json());
 
-    console.log("Se cargó: ", pokemon.name);
-
     return pokemon;
-  } catch (error) {
+  } catch {
     notFound();
   }
 };
 
-export default async function PokemonPage(props: { params: Promise<{ id: string }> }) {
-   const { id } = await props.params;
-
-  console.log("Se cargó: ", id);
+export default async function PokemonPage(props: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await props.params;
 
   const pokemon = await getPokemon(id);
   return (
