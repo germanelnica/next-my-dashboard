@@ -48,11 +48,11 @@ export const SideBar = () => {
               className="rounded-full w-8 h-8"
               width={128}
               height={80}
-              src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80"
+              src="https://media.licdn.com/dms/image/v2/C4E03AQEIgWLNSHVLPg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1636988541731?e=1766620800&v=beta&t=HmqVvO0LCwfJZPB2cgMxbygZ48GJkE8XT5hDfR_juYc"
               alt="user profile"
             />
           </span>
-          <span className="text-sm md:text-base font-bold">Edward Tompson</span>
+          <span className="text-sm md:text-base font-bold">German Núñez</span>
         </a>
       </div>
       <div id="nav" className="w-full px-6">
